@@ -29,13 +29,13 @@ describe("DayChooser", () => {
     })
 
     describe("daysReducer", () => {
-        test.each<number>([0, NaN, Infinity, -Infinity])('test with invalid parameter %i', (v: number) => expect(DayChooser.daysReducer(v)).toStrictEqual([]))
+        test.each<number>([0, NaN, Infinity, -Infinity])('test with invalid parameter %i', (v: number) => expect(DayChooser.decode(v)).toStrictEqual([]))
 
         test("it decodes one day", () => {
-            expect(DayChooser.daysReducer(1)).toStrictEqual(['dom'])
+            expect(DayChooser.decode(1)).toStrictEqual(['dom'])
         })
         test("it decodes a combination of days", () => {
-            expect(DayChooser.daysReducer(3)).toStrictEqual(['dom', 'lun'])
+            expect(DayChooser.decode(3)).toStrictEqual(['dom', 'lun'])
         })
     })
 
