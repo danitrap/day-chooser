@@ -1,12 +1,12 @@
 const days = {
-    dom: 0b0000001 as const,
-    lun: 0b0000010 as const,
-    mar: 0b0000100 as const,
-    mer: 0b0001000 as const,
-    gio: 0b0010000 as const,
-    ven: 0b0100000 as const,
-    sab: 0b1000000 as const,
-}
+    dom: 0b0000001,
+    lun: 0b0000010,
+    mar: 0b0000100,
+    mer: 0b0001000,
+    gio: 0b0010000,
+    ven: 0b0100000,
+    sab: 0b1000000,
+} as const;
 
 type Days = typeof days
 type KeysOf<T> = Array<keyof T>
