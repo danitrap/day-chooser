@@ -1,11 +1,12 @@
 
 import * as DayChooser from "./DayChooser"
+
 describe("DayChooser", () => {
     describe("toggleDay", () => {
-        let initialState = 0;
+        const initialState = 0;
 
         test("it adds a single day", () => {
-            let result = DayChooser.toggleDay("mar")(initialState)
+            const result = DayChooser.toggleDay("mar")(initialState)
             expect(result).toBe(4)
         })
 
@@ -23,7 +24,7 @@ describe("DayChooser", () => {
 
         test("when given null it doesn't do anything", () => {
             //@ts-expect-error
-            let result = DayChooser.toggleDay(null)(initialState)
+            const result = DayChooser.toggleDay(null)(initialState)
             expect(result).toBe(0)
         })
     })

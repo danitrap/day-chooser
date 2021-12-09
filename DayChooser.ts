@@ -1,29 +1,26 @@
 const days = {
-    dom: 1 as const,
-    lun: 2 as const,
-    mar: 4 as const,
-    mer: 8 as const,
-    gio: 16 as const,
-    ven: 32 as const,
-    sab: 64 as const,
+    dom: 0b0000001 as const,
+    lun: 0b0000010 as const,
+    mar: 0b0000100 as const,
+    mer: 0b0001000 as const,
+    gio: 0b0010000 as const,
+    ven: 0b0100000 as const,
+    sab: 0b1000000 as const,
 }
+
 type Days = typeof days
 type KeysOf<T> = Array<keyof T>
 
-export const toggleDay = (day: keyof Days) => (state: number) => {
-    return state ^ days[day]
-}
+export const toggleDay = (day: keyof Days) => (state: number) => state ^ days[day]
 
-const isDayPresent = (day: keyof Days) => (state: number) => {
-    return (state & days[day]) !== 0
-}
+const isDayPresent = (day: keyof Days) => (state: number) => (state & days[day]) !== 0
 
-function getTypedKeys<T>(obj: T): KeysOf<T> {
+function typedKeys<T>(obj: T): KeysOf<T> {
     return Object.keys(obj) as KeysOf<T>
 }
 
-export const decode = (state: number) => {
-    return getTypedKeys(days).reduce((acc, day) => {
-        return isDayPresent(day)(state) ? [...acc, day] : acc;
-    }, [] as KeysOf<Days>)
-}
+export const decode = (state: number) =>
+    typedKeys(days)
+        .reduce(
+            (acc, day) => isDayPresent(day)(state) ? [...acc, day] : acc
+            , [] as KeysOf<Days>)
