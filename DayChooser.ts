@@ -13,14 +13,10 @@ type KeysOf<T> = Array<keyof T>
 
 export const toggleDay = (day: keyof Days) => (state: number) => state ^ days[day]
 
-const isDayPresent = (day: keyof Days) => (state: number) => (state & days[day]) !== 0
+const isDayPresent = (state: number) => (day: keyof Days) => (state & days[day]) !== 0
 
 function typedKeys<T>(obj: T): KeysOf<T> {
     return Object.keys(obj) as KeysOf<T>
 }
 
-export const decode = (state: number) =>
-    typedKeys(days)
-        .reduce(
-            (acc, day) => isDayPresent(day)(state) ? [...acc, day] : acc
-            , [] as KeysOf<Days>)
+export const decode = (state: number) => typedKeys(days).filter(isDayPresent(state));
